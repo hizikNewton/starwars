@@ -3,45 +3,54 @@ import { characterType } from "../../data/type";
 import { Spinner } from "../Spinner";
 import * as S from "./styles";
 import { TableData } from "./TableData";
+import { Action, key, State } from "./types";
 
 interface Props {
   characterData: Array<characterType>;
   loading: boolean;
 }
-type key = keyof characterType;
-type Action = {
-  type: string;
-  payload: key;
-};
-type State = Array<characterType>;
 
 const Table: React.FC<Props> = ({ characterData, loading }: Props) => {
   const [toggle, setToggle] = useState<boolean>();
 
-  const filterBy = (key: key) => {
-    const compare = (a: characterType, b: characterType) => {
-      if (a[key] < b[key]) {
-        return -1;
+  const ascFilter = (key: key) => {
+    return function (a: characterType, b: characterType) {
+      if (key === "height") {
+        let numa = parseInt(a[key]);
+        let numb = parseInt(b[key]);
+        const result = numa < numb ? -1 : numa > numb ? 1 : 0;
+        return result;
       }
-      if (a[key] > b[key]) {
-        return 1;
-      }
-      return 0;
+      const result = a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0;
+      return result;
     };
-    return compare;
   };
-
+  const dscFilter = (key: key) => {
+    return function (a: characterType, b: characterType) {
+      if (key === "height") {
+        let numa = parseInt(a[key]);
+        let numb = parseInt(b[key]);
+        const result = numa < numb ? 1 : numa > numb ? -1 : 0;
+        return result;
+      }
+      const result = a[key] < b[key] ? 1 : a[key] > b[key] ? -1 : 0;
+      return result;
+    };
+  };
   const [initialState, setDataToSort] =
     useState<Array<characterType>>(characterData);
+
   const reducer = (state: State, action: Action): State => {
+    let comp;
     switch (action.type) {
       case "asc":
-        let comp = filterBy(action.payload);
+        comp = ascFilter(action.payload);
         initialState.sort(comp);
-        return state;
+        return initialState;
       case "dsc":
-        filterBy(action.payload);
-        return state;
+        comp = dscFilter(action.payload);
+        initialState.sort(comp);
+        return initialState;
       default:
         return state;
     }

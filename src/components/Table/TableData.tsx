@@ -9,7 +9,8 @@ interface Props {
 export const TableData = ({ characterData, setDataToSort }: Props) => {
   useEffect(() => {
     setDataToSort(characterData);
-  }, []);
+    // eslint-disable-next-line
+  }, [characterData]);
   return (
     <>
       {characterData?.map(({ name, height, gender }, idx) => (

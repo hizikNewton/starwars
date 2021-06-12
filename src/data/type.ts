@@ -11,6 +11,6 @@ export type filmType = {
 
 export type characterType = {
   name: string;
-  height: number;
+  height: string;
   gender: string;
 };
