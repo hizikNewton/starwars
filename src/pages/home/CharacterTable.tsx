@@ -10,6 +10,7 @@ interface Props {
 interface State {
   singleFilmData: Partial<filmType>;
   characterDataList: Array<characterType>;
+  loading: boolean;
 }
 
 class CharacterTable extends Component<Props, State> {
@@ -21,6 +22,7 @@ class CharacterTable extends Component<Props, State> {
         characters: [],
       },
       characterDataList: [],
+      loading: false,
     };
   }
 
@@ -36,7 +38,10 @@ class CharacterTable extends Component<Props, State> {
               gender,
             })
           );
-          this.setState({ characterDataList: characterDataList });
+          this.setState({
+            characterDataList: characterDataList,
+            loading: false,
+          });
         }
       }
     );
@@ -49,14 +54,17 @@ class CharacterTable extends Component<Props, State> {
     ) {
       const urls = this.props.singleFilmData.characters;
       this.getCharacterData(urls);
+      this.setState({ loading: true });
+      //loading
     }
   }
 
   render() {
+    const { characterDataList, loading } = this.state;
     return (
       <>
         <h1>Character Table</h1>
-        <Table characterData={this.state.characterDataList} />
+        <Table characterData={characterDataList} loading={loading} />
       </>
     );
   }
