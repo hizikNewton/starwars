@@ -16,9 +16,13 @@ export const Filter = ({ dispatch }: Props) => {
 
   useEffect(() => {
     dispatch({
+      type: "INITIALIZE",
+    });
+    dispatch({
       type: "GENDER_FILTER",
       payload: selectedFilter.selectedOption,
     });
+    // eslint-disable-next-line
   }, [selectedFilter.selectedOption]);
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {

@@ -3,8 +3,8 @@ import { characterType } from "../../data/type";
 import { Spinner } from "../Spinner";
 import * as S from "./styles";
 import { TableData } from "./TableData";
-import { Action, key, Payload, State } from "./types";
-import { Filter, filterState } from "../Filter";
+import { Action, key, State } from "./types";
+import { Filter } from "../Filter";
 import FilterSVG from "../../assets/img/Filter";
 import { ascFilter, dscFilter, genderFilter } from "../../helper";
 
@@ -30,15 +30,24 @@ const Table: React.FC<Props> = ({ characterData, loading }: Props) => {
   }, [characterData]);
 
   const nreducer = (state: State, action: Action): State => {
+    let comp;
     switch (action.type) {
       case "INITIALIZE": {
-        const state = action.payload! as State;
+        state = action.payload ? (action.payload! as State) : initialState;
         return state;
       }
       case "GENDER_FILTER": {
         const newState = genderFilter(action.payload as any, state);
         return newState;
       }
+      case "ASC_SORT":
+        comp = ascFilter(action.payload! as keyof characterType);
+        state.sort(comp);
+        return state;
+      case "DSC_SORT":
+        comp = dscFilter(action.payload! as keyof characterType);
+        state.sort(comp);
+        return state;
       default:
         return state;
     }
@@ -46,43 +55,13 @@ const Table: React.FC<Props> = ({ characterData, loading }: Props) => {
 
   const [state, dispatch] = useReducer(nreducer, initialState);
   console.log(state);
-  /* 
-  const reducer = (state: State, action: Action): State => {
-    let comp;
-    switch (action.type) {
-      case "asc":
-        comp = ascFilter(action.payload!);
-        initialState.sort(comp);
-        return initialState;
-      case "dsc":
-        comp = dscFilter(action.payload!);
-        initialState.sort(comp);
-        return initialState;
-      case "genderFilter":
-        const newState = genderFilter(action.payload as any, state);
-        return newState;
-      default:
-        init(initialState);
-        return state;
-    }
-  };
-
-  const init = (initialState: Array<characterType>) => {
-    setData(initialState);
-    return initialState;
-  };
-  const [state, dispatch] = useReducer(reducer, initialState, init); */
 
   const toggleHandler = (e: React.MouseEvent<HTMLTableHeaderCellElement>) => {
     const key = e.currentTarget.headers as key;
     setToggle((toggle) => ({ ...toggle, header: !toggle.header }));
-    let toggleVal = toggle.header ? "asc" : "dsc";
+    let toggleVal = toggle.header ? "DSC_SORT" : "ASC_SORT";
     dispatch({ type: toggleVal, payload: key });
   };
-
-  const [selectedFilter, setSelectedFilter] = useState<filterState>({
-    selectedOption: "all",
-  });
 
   return (
     <S.Table>
@@ -112,7 +91,7 @@ const Table: React.FC<Props> = ({ characterData, loading }: Props) => {
       <tbody>
         <>
           {!loading && characterData.length !== 0 ? (
-            <TableData characterData={characterData} initialState={state} />
+            <TableData initialState={state} />
           ) : loading ? (
             <tr>
               <td>

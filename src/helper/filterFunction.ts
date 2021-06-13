@@ -36,6 +36,5 @@ export const genderFilter = (
     return data;
   }
   let result = data.filter((i) => i.gender === gender);
-  console.log("G:", gender, "D:", data, "R", result);
   return result;
 };
