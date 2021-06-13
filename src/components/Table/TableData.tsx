@@ -1,20 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { characterType } from "../../data/type";
 
 interface Props {
   characterData: Array<characterType>;
-  initializeDataFN: (characterData: Array<characterType>) => void;
+  //initializeDataFN: (characterData: Array<characterType>) => void;
   initialState: Array<characterType>;
 }
 export const TableData = ({
   characterData,
-  initializeDataFN,
+  //initializeDataFN,
   initialState,
 }: Props) => {
+  /* 
   useEffect(() => {
     initializeDataFN(characterData);
     // eslint-disable-next-line
-  }, [characterData]);
+  }, [characterData]); */
+
   return (
     <>
       {initialState?.map(({ name, height, gender }, idx) => (

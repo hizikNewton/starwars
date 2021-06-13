@@ -32,7 +32,10 @@ export const genderFilter = (
   gender: filterState[keyof filterState],
   data: Array<characterType>
 ) => {
+  if (gender === "all") {
+    return data;
+  }
   let result = data.filter((i) => i.gender === gender);
-  console.log(result);
+  console.log("G:", gender, "D:", data, "R", result);
   return result;
 };
