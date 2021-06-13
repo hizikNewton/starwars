@@ -1,9 +1,12 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import { characterType } from "../../data/type";
 import { Spinner } from "../Spinner";
 import * as S from "./styles";
 import { TableData } from "./TableData";
 import { Action, key, State } from "./types";
+import { Filter, filterState } from "../Filter";
+import FilterSVG from "../../assets/img/Filter";
+import { ascFilter, dscFilter, genderFilter } from "../../helper";
 
 interface Props {
   characterData: Array<characterType>;
@@ -11,36 +14,15 @@ interface Props {
 }
 
 const Table: React.FC<Props> = ({ characterData, loading }: Props) => {
-  const [toggle, setToggle] = useState<boolean>();
+  const [toggle, setToggle] = useState<{ header: boolean; filter: boolean }>({
+    header: false,
+    filter: true,
+  });
 
-  const ascFilter = (key: key) => {
-    return function (a: characterType, b: characterType) {
-      if (key === "height") {
-        let numa = parseInt(a[key]);
-        let numb = parseInt(b[key]);
-        const result = numa < numb ? -1 : numa > numb ? 1 : 0;
-        return result;
-      }
-      const result = a[key] < b[key] ? -1 : a[key] > b[key] ? 1 : 0;
-      return result;
-    };
-  };
-  const dscFilter = (key: key) => {
-    return function (a: characterType, b: characterType) {
-      if (key === "height") {
-        let numa = parseInt(a[key]);
-        let numb = parseInt(b[key]);
-        const result = numa < numb ? 1 : numa > numb ? -1 : 0;
-        return result;
-      }
-      const result = a[key] < b[key] ? 1 : a[key] > b[key] ? -1 : 0;
-      return result;
-    };
-  };
-  const [initialState, setDataToSort] =
-    useState<Array<characterType>>(characterData);
+  const [initialState, setData] = useState<Array<characterType>>(characterData);
 
   const reducer = (state: State, action: Action): State => {
+    state = init(initialState);
     let comp;
     switch (action.type) {
       case "asc":
@@ -51,27 +33,59 @@ const Table: React.FC<Props> = ({ characterData, loading }: Props) => {
         comp = dscFilter(action.payload);
         initialState.sort(comp);
         return initialState;
+      case "genderFilter":
+        const newState = genderFilter(action.payload as any, state);
+        setData(newState);
+        return newState;
       default:
+        init(initialState);
         return state;
     }
   };
 
   const init = (initialState: Array<characterType>) => {
-    setDataToSort(initialState);
+    setData(initialState);
     return initialState;
   };
   const [state, dispatch] = useReducer(reducer, initialState, init);
 
   const toggleHandler = (e: React.MouseEvent<HTMLTableHeaderCellElement>) => {
     const key = e.currentTarget.headers as key;
-    setToggle((toggle) => !toggle);
-    let toggleVal = toggle ? "asc" : "dsc";
+    setToggle((toggle) => ({ ...toggle, header: !toggle.header }));
+    let toggleVal = toggle.header ? "asc" : "dsc";
     dispatch({ type: toggleVal, payload: key });
+  };
+
+  const [selectedFilter, setSelectedFilter] = useState<filterState>({
+    selectedOption: "all",
+  });
+  const filterHandler = (e: React.FormEvent<HTMLInputElement>) => {
+    const { value } = e.currentTarget as any;
+    setToggle((toggle) => ({ ...toggle, header: !toggle.filter }));
+    setSelectedFilter((option) => ({ ...option, selectedOption: value }));
+    dispatch({
+      type: "genderFilter",
+      payload: selectedFilter.selectedOption as any,
+    });
   };
 
   return (
     <S.Table>
       <thead>
+        <tr>
+          <th>
+            <span>
+              <FilterSVG />
+              {"Filter"}
+            </span>
+            {toggle.filter && (
+              <Filter
+                handleChange={filterHandler}
+                selectedFilter={selectedFilter}
+              />
+            )}
+          </th>
+        </tr>
         <tr>
           <th onClick={toggleHandler} headers="name">
             {"Name"}
@@ -90,12 +104,14 @@ const Table: React.FC<Props> = ({ characterData, loading }: Props) => {
           {!loading && characterData.length !== 0 ? (
             <TableData
               characterData={characterData}
-              sortedData={state}
-              setDataToSort={init}
+              initialState={initialState}
+              initializeDataFN={init}
             />
           ) : loading ? (
             <tr>
-              <Spinner />
+              <td>
+                <Spinner />
+              </td>
             </tr>
           ) : (
             <></>

@@ -1,6 +1,6 @@
 import React, { useContext, useRef, useState } from "react";
 import DropDownArrow from "../../assets/img/DropDownArrow";
-import { maybe } from "../../hooks/useHandlerWhenClickedOutside";
+import { maybe } from "../../helper";
 import { MovieCtx } from "../../pages/home/Hero";
 import { filmsType } from "../../pages/home/types";
 import * as S from "./styles";

@@ -3,17 +3,21 @@ import { characterType } from "../../data/type";
 
 interface Props {
   characterData: Array<characterType>;
-  setDataToSort: (characterData: Array<characterType>) => void;
-  sortedData: Array<characterType>;
+  initializeDataFN: (characterData: Array<characterType>) => void;
+  initialState: Array<characterType>;
 }
-export const TableData = ({ characterData, setDataToSort }: Props) => {
+export const TableData = ({
+  characterData,
+  initializeDataFN,
+  initialState,
+}: Props) => {
   useEffect(() => {
-    setDataToSort(characterData);
+    initializeDataFN(characterData);
     // eslint-disable-next-line
   }, [characterData]);
   return (
     <>
-      {characterData?.map(({ name, height, gender }, idx) => (
+      {initialState?.map(({ name, height, gender }, idx) => (
         <tr key={`${name}${height}${idx}`}>
           <td>{name}</td>
           <td>{height}</td>

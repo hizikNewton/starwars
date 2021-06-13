@@ -11,12 +11,8 @@ export const defaultTheme = {
     xxLargeScreen: "1600px",
     xxxLargeScreen: "1920px",
   },
-  content:{
-    padding:"25px"
-  },
-  shapes:{
-    width:"75px",
-    height:"75px"
+  content: {
+    padding: "25px",
   },
   button: {
     animation: {
