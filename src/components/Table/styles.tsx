@@ -2,12 +2,16 @@ import styled from "styled-components";
 
 export const TableHeader = styled.div`
   display: flex;
-  background-color: yellowgreen;
+  background-image: linear-gradient(315deg, #f5d020 0%, #57514f 74%, #f5d020);
   height: 70px;
   position: sticky;
   width: 50%;
   margin: auto;
   justify-content: space-between;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `;
 export const TableWrapper = styled.div`
   box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
@@ -16,6 +20,10 @@ export const TableWrapper = styled.div`
   overflow-y: scroll;
   overflow-x: hidden;
   margin: auto;
+  @media (max-width: 600px) {
+    width: 100%;
+    padding: 0 10px;
+  }
 `;
 
 export const Table = styled.table`
@@ -34,6 +42,10 @@ export const Table = styled.table`
   tr:nth-child(even) {
     background: #f8f8f8;
   }
+  tr .spinner {
+    padding: 5px 10px;
+    vertical-align: middle;
+  }
   td {
     border-right: 1px solid #f8f8f8;
     font-size: 12px;
@@ -50,6 +62,10 @@ export const Table = styled.table`
 export const MovieCharacterTable = styled.div`
   display: block;
   width: 50%;
+  @media (max-width: 600px) {
+    width: 100vw;
+    order: 2;
+  }
 `;
 export const FilterIcon = styled.div`
   display: block;

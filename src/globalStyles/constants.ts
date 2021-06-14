@@ -1,4 +1,3 @@
-
 // breakpoints
 export const xxxLargeScreen = 1920;
 export const xxLargeScreen = 1600;
@@ -8,42 +7,41 @@ export const mediumScreen = 720;
 export const smallScreen = 540;
 
 //colors
-export const baseFontColor = "#323232";
-export const baseFontColorSemiTransparent = "rgba(50,50,50,0.6)";
-export const baseFontColorTransparent = "rgba(50,50,50,0.1)";
+export const baseFontColor = "black";
+export const baseFontColorSemiTransparent = "#5554027f";
+export const baseFontColorTransparent = "yellow";
 export const mainBackgroundColor = "#f5f6fc";
 export const white = "#fff";
 export const black = "#323232";
-export const blue = "rgb(33,18,94)";
+export const mediumYellow = "#e4e682";
 export const gray = "#7d7d7d";
 export const green = "#3ed256";
 export const turquoise = "#13bebb";
 export const red = "red";
 export const yellow = "yellow";
-export const orange = "orange";
+export const lightYellow = "#f2faae";
 
 // theme colors
 export const theme = {
-    activeMenuOption: red,
-    baseFont: baseFontColor,
-    baseFontColorSemiTransparent,
-    baseFontColorTransparent,
-    mainBackgroundColor,
-    dark: black,
-    disabled: gray,
-    divider: gray,
-    lightFont: gray,
-    primary: turquoise,
-    secondary: blue,
-    white,
-    red,
-    green,
-    yellow,
-    blue,
-    orange,
-    gray
-  };
-  
+  activeMenuOption: red,
+  baseFont: baseFontColor,
+  baseFontColorSemiTransparent,
+  baseFontColorTransparent,
+  mainBackgroundColor,
+  dark: black,
+  disabled: gray,
+  divider: gray,
+  lightFont: gray,
+  primary: yellow,
+  secondary: mediumYellow,
+  white,
+  red,
+  green,
+  yellow,
+  mediumYellow,
+  lightYellow,
+  gray,
+};
 
 // typography
 export const baseFontFamily = "'Inter', sans-serif";
@@ -59,7 +57,6 @@ export const h4FontSize = "1.125rem"; // 18px
 export const labelFontSize = "0.75rem"; // 12px
 export const smallFontSize = "0.875rem"; // 14px
 export const ultraBigFont = "6rem"; // 96px
-
 
 // spacing
 export const spacer = 1; // rem

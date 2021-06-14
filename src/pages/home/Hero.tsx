@@ -56,6 +56,7 @@ class Hero extends Component<Props, State> {
 
   fetchUrlData = () => {
     const ds = new RestDataSource(this.state.selectedUrl);
+
     ds.GetData(({ characters, opening_crawl, title, url }: filmType) => {
       this.setState({
         singleFilmData: {
@@ -70,10 +71,15 @@ class Hero extends Component<Props, State> {
 
   componentDidMount() {
     this.dataSource.GetData((data: DataType) => {
-      const films: filmsType = data.results.map(({ title, url }) => ({
-        title,
-        url,
-      }));
+      const films: filmsType = data.results
+        .map(({ title, url, release_date }) => ({
+          title,
+          url,
+          release_date,
+        }))
+        .sort(
+          (a, b) => Date.parse(a.release_date!) - Date.parse(b.release_date!)
+        );
       this.setState({ films: films });
     });
   }

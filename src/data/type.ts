@@ -7,6 +7,7 @@ export type filmType = {
   characters: Array<string>;
   title: string;
   url: string;
+  release_date?: string;
 };
 
 export type characterType = {

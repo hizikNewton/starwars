@@ -1,13 +1,13 @@
-import styled from "styled-components";
+import { styled } from "../../globalStyles";
 
 export const CrawlContainer = styled.div`
   position: relative;
-  border: 10px solid green;
   max-width: 50%;
   max-height: 100%;
   @media (max-width: 600px) {
     order: 1;
     max-width: 100vw;
+    height: 50%;
   }
   &::after {
     content: "";
@@ -33,15 +33,15 @@ export const Crawl = styled.div`
 
   p {
     margin: 50% 0 0 0;
-    color: #ffc909;
-    font-size: 0.8em;
+    color: ${(props) => props.theme.colors.baseFontColorTransparent};
+    font-size: ${(props) => props.theme.typography.h2FontSize};
     line-height: 1.5em;
     font-weight: bold;
     text-align: justify;
     position: relative;
     animation: scroll 30s linear forwards;
 
-    animation-iteration-count: 1;
+    animation-iteration-count: infinite;
     @keyframes scroll {
       from {
         top: 0px;

@@ -4,7 +4,7 @@ export const DropDown = styled.div`
   margin: auto;
   display: flex;
   width: max-content;
-  background-color: #fff;
+  background-color: ${(props) => props.theme.colors.yellow};
   cursor: pointer;
 
   p {
@@ -25,12 +25,12 @@ export const OptionListItem = styled.div.attrs({
   display: flex;
   flex-direction: column;
   width: max-content;
-  height: 250px;
+  height: max-content;
   overflow-y: scroll;
   overflow-x: hidden;
   position: absolute;
-  background-color: #fff;
-  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.5);
+  background-color: ${(props) => props.theme.colors.mediumYellow};
+  box-shadow: 0px 5px 8px #5554027f;
   border-radius: 5px;
   top: 20px;
   left: 0;

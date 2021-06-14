@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "../../globalStyles";
 
 export const Box = styled.form`
   input[type="radio"] {
@@ -14,6 +14,6 @@ export const Box = styled.form`
     top: -20px;
     left: 0;
     position: relative;
-    background-color: yellow;
+    background-color: ${(props) => props.theme.colors.yellow};
   }
 `;
