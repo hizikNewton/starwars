@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { styled } from "../../globalStyles";
 
 export const TableHeader = styled.div`
   display: flex;
@@ -22,7 +22,6 @@ export const TableWrapper = styled.div`
   margin: auto;
   @media (max-width: 600px) {
     width: 100%;
-    padding: 0 10px;
   }
 `;
 
@@ -40,7 +39,10 @@ export const Table = styled.table`
     order: 2;
   }
   tr:nth-child(even) {
-    background: #f8f8f8;
+    background: ${(props) => props.theme.colors.lightYellow};
+  }
+  tr:nth-child(odd) {
+    background: white;
   }
   tr .spinner {
     padding: 5px 10px;
@@ -57,6 +59,7 @@ export const Table = styled.table`
     top: 0;
     box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.4);
     z-index: 2;
+    cursor: pointer;
   }
 `;
 export const MovieCharacterTable = styled.div`
@@ -68,6 +71,7 @@ export const MovieCharacterTable = styled.div`
   }
 `;
 export const FilterIcon = styled.div`
+  cursor: pointer;
   display: block;
   div {
     align-items: center;

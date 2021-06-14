@@ -96,13 +96,13 @@ const Table: React.FC<Props> = ({ characterData, loading, title }: Props) => {
               {!loading && characterData.length !== 0 ? (
                 <TableData initialState={state} />
               ) : loading ? (
-                <tr className="spinner">
+                <tr>
                   <td>
                     <Spinner />
                   </td>
                 </tr>
               ) : (
-                <Spinner />
+                <></>
               )}
             </>
           </tbody>
