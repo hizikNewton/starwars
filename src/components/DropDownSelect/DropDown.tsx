@@ -12,7 +12,6 @@ interface Props {
 
 const DropDown = ({ text, data }: Props) => {
   const [dropVisible, setDropVisible] = useState(false);
-
   const MovieContext = useContext(MovieCtx);
 
   const handleDropDownVisibility = () => {
