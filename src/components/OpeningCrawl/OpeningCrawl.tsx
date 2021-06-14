@@ -6,7 +6,7 @@ interface Props {
   title: string;
 }
 
-export const OpeningCrawl = ({ opening_crawl, title }: Props) => {
+export const OpeningCrawl = ({ opening_crawl }: Props) => {
   return (
     <S.CrawlContainer>
       <S.Crawl id="crawl">

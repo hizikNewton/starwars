@@ -7,7 +7,7 @@ interface Props {
 export const TableData = ({ initialState }: Props) => {
   const ComputeHeight = () => {
     let height = initialState
-      .map((i) => parseInt(i.height))
+      .map((i) => (parseInt(i.height) ? parseInt(i.height) : 0))
       .reduce((a, b) => a + b, 0);
 
     return (

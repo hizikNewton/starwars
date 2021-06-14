@@ -79,11 +79,18 @@ class Hero extends Component<Props, State> {
   }
   render() {
     const { selectedTitle, selectedUrl, films, singleFilmData } = this.state;
+    const showMovieInfo =
+      selectedTitle === "choose a movie title" ? false : true;
     return (
       <MovieCtx.Provider value={{ setUrlAndTitle: this.updateTitle }}>
         <DropDown text={selectedTitle} data={films} />
-        <S.HeroContainer>
-          <CharacterTable url={selectedUrl} singleFilmData={singleFilmData} />
+        <S.HeroContainer setBackground={showMovieInfo}>
+          <CharacterTable
+            showMovieInfo={showMovieInfo}
+            url={selectedUrl}
+            singleFilmData={singleFilmData}
+            selectedTitle={selectedTitle}
+          />
         </S.HeroContainer>
       </MovieCtx.Provider>
     );

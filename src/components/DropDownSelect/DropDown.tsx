@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
-import DropDownArrow from "../../assets/img/DropDownArrow";
+import { DropDownArrow } from "../../assets/img";
 import { maybe } from "../../helper";
 import { MovieCtx } from "../../pages/home/Hero";
 import { filmsType } from "../../pages/home/types";

@@ -8,6 +8,8 @@ import * as S from "./styles";
 interface Props {
   url: string;
   singleFilmData: Partial<filmType>;
+  selectedTitle: string;
+  showMovieInfo: boolean;
 }
 interface State {
   singleFilmData: Partial<filmType>;
@@ -16,6 +18,7 @@ interface State {
 }
 
 class CharacterTable extends Component<Props, State> {
+  //private movieSelected: boolean;
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -72,10 +75,16 @@ class CharacterTable extends Component<Props, State> {
       singleFilmData: { opening_crawl, title },
     } = this.state;
     return (
-      <S.CharacterTable>
-        <Table characterData={characterDataList} loading={loading} />
-        <OpeningCrawl opening_crawl={opening_crawl!} title={title!} />
-      </S.CharacterTable>
+      this.props.showMovieInfo && (
+        <S.CharacterTable>
+          <Table
+            characterData={characterDataList}
+            loading={loading}
+            title={title!}
+          />
+          <OpeningCrawl opening_crawl={opening_crawl!} title={title!} />
+        </S.CharacterTable>
+      )
     );
   }
 }

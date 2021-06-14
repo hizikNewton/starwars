@@ -41,7 +41,7 @@ export const Crawl = styled.div`
     position: relative;
     animation: scroll 30s linear forwards;
 
-    animation-iteration-count: infinite;
+    animation-iteration-count: 1;
     @keyframes scroll {
       from {
         top: 0px;

@@ -1,4 +1,4 @@
-const FilterSVG = () => {
+export const FilterSVG = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,4 +15,3 @@ const FilterSVG = () => {
     </svg>
   );
 };
-export default FilterSVG;
