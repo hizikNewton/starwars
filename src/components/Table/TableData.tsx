@@ -5,6 +5,19 @@ interface Props {
   initialState: Array<characterType>;
 }
 export const TableData = ({ initialState }: Props) => {
+  const ComputeHeight = () => {
+    let height = initialState
+      .map((i) => parseInt(i.height))
+      .reduce((a, b) => a + b, 0);
+
+    return (
+      <>
+        <td key={"height"}>{`${height} cm (${Math.trunc(
+          height * 0.0328084
+        )}ft/${(height * 0.393701).toFixed(2)}in)`}</td>
+      </>
+    );
+  };
   return (
     <>
       {initialState?.map(({ name, height, gender }, idx) => (
@@ -14,6 +27,7 @@ export const TableData = ({ initialState }: Props) => {
           <td>{gender}</td>
         </tr>
       ))}
+      <tr key={"height"}>{ComputeHeight()}</tr>
     </>
   );
 };

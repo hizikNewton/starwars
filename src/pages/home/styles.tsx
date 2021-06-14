@@ -12,3 +12,12 @@ export const HeroContainer = styled.div`
   border: 10px solid white;
   padding-top: 100px;
 `;
+
+export const CharacterTable = styled.div`
+  max-width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+  @media (max-width: 600px) {
+    flex-direction: row;
+  }
+`;

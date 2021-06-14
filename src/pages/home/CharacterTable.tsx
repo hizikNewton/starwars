@@ -2,6 +2,8 @@ import { Component } from "react";
 import Table from "../../components/Table/Table";
 import { RestDataSource } from "../../data/dataSource";
 import { characterType, filmType } from "../../data/type";
+import { OpeningCrawl } from "../../components/OpeningCrawl/OpeningCrawl";
+import * as S from "./styles";
 
 interface Props {
   url: string;
@@ -20,6 +22,7 @@ class CharacterTable extends Component<Props, State> {
       singleFilmData: {
         opening_crawl: "",
         characters: [],
+        title: "",
       },
       characterDataList: [],
       loading: false,
@@ -53,19 +56,26 @@ class CharacterTable extends Component<Props, State> {
       this.props.singleFilmData.characters
     ) {
       const urls = this.props.singleFilmData.characters;
+      const { opening_crawl, title } = this.props.singleFilmData;
       this.getCharacterData(urls);
-      this.setState({ loading: true });
-      //loading
+      this.setState({
+        loading: true,
+        singleFilmData: { opening_crawl: opening_crawl, title: title },
+      });
     }
   }
 
   render() {
-    const { characterDataList, loading } = this.state;
+    const {
+      characterDataList,
+      loading,
+      singleFilmData: { opening_crawl, title },
+    } = this.state;
     return (
-      <>
-        <h1>Character Table</h1>
+      <S.CharacterTable>
         <Table characterData={characterDataList} loading={loading} />
-      </>
+        <OpeningCrawl opening_crawl={opening_crawl!} title={title!} />
+      </S.CharacterTable>
     );
   }
 }

@@ -54,7 +54,6 @@ const Table: React.FC<Props> = ({ characterData, loading }: Props) => {
   };
 
   const [state, dispatch] = useReducer(nreducer, initialState);
-  console.log(state);
 
   const toggleHandler = (e: React.MouseEvent<HTMLTableHeaderCellElement>) => {
     const key = e.currentTarget.headers as key;
