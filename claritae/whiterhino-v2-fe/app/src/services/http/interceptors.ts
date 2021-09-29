@@ -1,6 +1,6 @@
 import { AxiosError } from "axios";
-import { AppActions } from "../../context/actions";
-import { AppDispatch } from "../../context/reducers";
+import { AppActions } from "../../contexts/actions";
+import { AppDispatch } from "../../contexts/reducers";
 import i18n from "../../utils/i18n";
 import { axiosIns } from "./fetcher";
 
