@@ -1,13 +1,7 @@
 import React from "react";
 import useStyles from "./styles";
 
-import {
-  Route,
-  Switch,
-  Redirect,
-  withRouter,
-  RouteComponentProps,
-} from "react-router-dom";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import Header from "../Header/Header";
 import SideBar from "../Sidebar/SideBar";
 

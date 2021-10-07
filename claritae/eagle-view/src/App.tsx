@@ -3,12 +3,12 @@ import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
 import Layout from "./components/Layout/Layout";
 import Error from "./pages/error/Error";
 
-interface Props {
+interface PrivateRouteProps {
   path: string;
   component: FC<any> | ComponentType;
 }
 
-function PrivateRoute(props: Props) {
+function PrivateRoute(props: PrivateRouteProps) {
   const { component, ...rest } = props;
   const isAuthenticated = true;
   return (
@@ -31,6 +31,7 @@ function PrivateRoute(props: Props) {
     />
   );
 }
+interface Props {}
 const App = (props: Props) => {
   return (
     <HashRouter>
