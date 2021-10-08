@@ -28,13 +28,7 @@ const Header = (props: Props) => {
   return (
     <AppBar position="fixed" className={classes.appBar} elevation={0}>
       <Toolbar className={classes.toolbar}>
-        <Typography
-          className={classes.logotype}
-          variant="h6"
-          size="md"
-          color=""
-          weight="medium"
-        >
+        <Typography variant="h6" size="md" color="" weight="medium">
           {"Dashboard"}
         </Typography>
 

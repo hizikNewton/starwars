@@ -1,4 +1,4 @@
-import { Drawer } from "@material-ui/core";
+import { Drawer, List } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 
 import classNames from "classnames";
@@ -7,11 +7,13 @@ import classNames from "classnames";
 import useStyles from "./styles";
 import { useLayoutState } from "../../context/providers/LayoutProvider";
 import { useTheme } from "@material-ui/core/styles";
-import { withRouter } from "react-router";
+import { RouteComponentProps, withRouter } from "react-router";
+import { SideBarNavs } from "./sidebarNavigations";
+import SidebarLink from "./components/SidebarLink";
 
-interface Props {}
+interface Props extends RouteComponentProps {}
 
-const SideBar = (props: Props) => {
+const SideBar = ({ location }: Props) => {
   const classes = useStyles();
   const theme = useTheme();
   const { isSidebarOpened } = useLayoutState();
@@ -51,7 +53,24 @@ const SideBar = (props: Props) => {
         }),
       }}
       open={isSidebarOpened}
-    ></Drawer>
+    >
+      <div className={classes.toolbar} />
+      <List>
+        {SideBarNavs.map((link) => (
+          <SidebarLink
+            key={link.id}
+            location={location}
+            isSidebarOpened={isSidebarOpened}
+            label={link.label}
+            type={link.type ?? ""}
+            icon={link.icon}
+            children={link.children}
+            link={link.link}
+            nested={link.nested ?? false}
+          />
+        ))}
+      </List>
+    </Drawer>
   );
 };
 

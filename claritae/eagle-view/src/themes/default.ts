@@ -89,7 +89,7 @@ const defaultTheme = {
     },
     MuiTouchRipple: {
       child: {
-        backgroundColor: "white",
+        backgroundColor: "#f6f8ff",
       },
     },
     MuiTableRow: {

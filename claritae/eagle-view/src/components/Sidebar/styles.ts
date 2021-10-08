@@ -9,6 +9,7 @@ export default makeStyles((theme) => ({
   },
   drawerOpen: {
     width: drawerWidth,
+    backgroundColor: "#192369",
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -19,5 +20,11 @@ export default makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+  },
+  toolbar: {
+    ...theme.mixins.toolbar,
+    [theme.breakpoints.down("sm")]: {
+      display: "none",
+    },
   },
 }));
